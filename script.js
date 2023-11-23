@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             menuList.style.display = 'none';
         }
     });
-}); 
+
 
 
 
@@ -531,4 +531,4 @@ document.getElementById("goToPathfindingButton").addEventListener("click", funct
     // Generate an array when the page loads
     generateArray();
     
- 
+});
