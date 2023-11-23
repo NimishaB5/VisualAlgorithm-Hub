@@ -1,0 +1,392 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+/* Add this style to give the bars a border instead of a background color */
+
+
+
+
+/*
+#welcome-section {
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(to right,  #2980b9, #3498db);
+    padding: 50px;
+    border-radius: 10px;
+    margin-top: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+#welcome-section h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+
+#welcome-section p{
+    color: #fff;
+    font-size: 24px;
+    line-height: 1.5;
+     
+}
+
+#algorithm-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+#sorting-section{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#sorting-section h2{
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.btn{
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s transform 0.3s;
+}
+
+
+.btn:hover{
+    background-color:var(--hover-color);
+}
+
+.btn:active{
+    transform: scale(0.95);
+    background-color: var(--hover-color);
+}
+
+.select2-dropdown {
+    width: 40%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.select2-dropdown:hover {
+    border-color: #4bb3fd;
+}
+
+.select2-dropdown option {
+    background-color: #fff;
+    color: #333;
+}
+
+
+.select2-dropdown::-ms-expand {
+    display: none;
+}
+
+.select2-dropdown::before, .select2-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top-color: #333;
+    margin-top: -3px;
+    pointer-events: none;
+}
+
+/* Style for the select dropdown arrow on hover 
+.select2-dropdown:hover::before, .select2-dropdown:hover::after {
+    border-top-color: #4bb3fd;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--text-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-family: 'Raleway',sans-serif;
+    bottom: 110%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+#array-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    height: 300px;
+}
+
+
+
+.hidden {
+    display: none;
+}
+
+#completionMessage {
+    font-size: 24px;
+    color: green;
+    text-align: center;
+    margin-top: 20px;
+}
+
+ Style for the grid container 
+#grid-container {
+    display: none;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #eee;
+    
+}
+
+#algorithm-selection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#algorithm-selection label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#pathfindingAlgorithmSelection {
+    padding: 8px;
+}
+
+Style for the table (grid) 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #000;
+}
+
+ Style for the table cells 
+td {
+    width: 30px; /* Adjust the width of cells 
+    height: 30px; /* Adjust the height of cells 
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    text-align: center;
+    vertical-align: middle;
+}
+.start{
+    background-color: #0074d9;
+    color: #fff;
+    border: none;;
+}
+.end{
+    background-color: #ff4136;
+    color: #fff;
+    border: none;
+}
+/* Style for obstacle cells 
+.obstacle {
+    background-color: #333; /* Dark gray for obstacles 
+    color: white; /* White text for obstacles 
+    border: none;
+}
+
+.path{
+    background-color: #01ff70;
+    color: #000;
+    border: none;
+}
+
+#algorithm-description{
+    background-color: var(--argentinian-blue);
+    padding: 10px;
+    margin-top: 20px;  Add some spacing from the content above 
+    border-radius: 5px; /* Add rounded corners for a visually appealing look 
+}
+
+#algorithm-description p {
+    margin: 0;
+    font-size: 16px; 
+    color: var(--paynes-gray);
+    
+}
+  Improve the appearance of the array elements 
+.array-element {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #3498db;
+    color:#fff;
+    border: 1px solid #2980b9;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    border-radius: 5px;
+}  
+/* Add a style for the result display 
+#searchResult {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+#searchResult.success {
+    color: #4CAF50; /* Green color for success 
+}
+
+/* #searchResult.failure {
+    color: #f44336; Red color for failure 
+}
+
+#searchResult i {
+    margin-right: 5px;
+}
+
+/* Add a style for the visualization container 
+#searchVisualization {
+    margin-top: 20px;
+} 
+
+input[type="text"],
+input[type="number"] {
+    width: 200px;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Additional styles for the array container 
+#array-container {
+    margin-top: 20px;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    gap: 1px;
+}
+
+#grid tr {
+    display: flex;
+}
+
+#grid td {
+    flex: 1;
+    height: 30px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#grid-section {
+    padding: 20px;
+}
+
+
+
+/* Additional styles for the legend 
+legend {
+    font-size: 20px;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+/* Add these styles for the spinner 
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 3px 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
+    margin-top: 10px;
+    font-size: 14px;
+}#/

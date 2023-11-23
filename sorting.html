@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <title>Sorting Algorithms - Visual Algorithm Hub</title>
+    <style>
+        /* Add this to your existing styles or in a separate stylesheet */
+        #array-container {
+             display: flex;
+             flex-direction: row;
+             justify-content: center;
+             align-items: flex-end;
+             height: 300px;
+             margin-top: 20px;
+             border-radius: 8px;
+             border: 1px solid #ccc; 
+        }
+        .bar {
+                width: 20px;
+                margin: 0 2px;
+                background-color: lightblue;
+                transition: height 0.3s;
+        }
+         .bar-highlight {
+             background-color: red;
+         }
+          #algorithm-description {
+          padding: 10px;
+          background-color: #f4f4f4; /* Change to your desired color */
+          border-radius: 8px;
+          margin-top: 10px;
+        }
+        .cursor {
+    animation: blink 1s infinite;
+    transition: color 0.3s;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+        
+
+
+    </style>
+</head>
+
+
+<body class="font-sans bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white">
+    <div id="__next">
+        <div class="bg-white dark:bg-gray-900">
+            <div class="border-b dark:border-gray-500">
+                <div class="container mx-auto">
+                    <div class=></div>
+                    <div class="flex items-center justify-between py-4 md:space-x-4">
+                        <div class="flex items-center">
+                            <span class="text-purple-700 text-lg font-bold">&lt;/&gt; Visual Algorithm Hub</span>
+                        </div>
+                        <div class="hidden md:flex items-center space-x-4">
+                            <a href="index.html" class="text-black hover:text-purple-700 dark:text-white">Home</a>
+                            <a href="sorting.html" id="sorting-link" class="text-black hover:text-purple-700 dark:text-white">Sorting Algorithms</a>
+                            <a href="pathfinding.html" id="pathfinding-link" class="text-black hover:text-purple-700 dark:text-white">Pathfinding Algorithms</a>
+                            <a href="searching.html" id="searching-link" class="text-black hover:text-purple-700 dark:text-white">Searching Algorithms</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto mt-4  my-8 p-8 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                <section id="sorting-section">
+                    <h2 class="text-3xl font-semibold text-gray-800 dark:text-white mb-4">Sorting Algorithms</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div>
+                            <label for="speedControl" class="text-gray-700 dark:text-gray-300">Animation Speed:</label>
+                            <input type="range" id="speedControl" min="1" max="10" value="5"
+                                class="w-full bg-gray-200 dark:bg-gray-700 rounded-md p-1">
+                        </div>
+                        <div>
+                            <label for="arraySize" class="text-gray-700 dark:text-gray-300">Array Size:</label>
+                            <input type="range" id="arraySize" min="1" max="100" value="50"
+                                class="w-full bg-gray-200 dark:bg-gray-700 rounded-md p-1">
+                        </div>
+                        <div>
+                            <button id="generateArrayButton"
+                                class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full">
+                                Generate New Array
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="my-4">
+                        <label for="algorithmSelection" class="text-gray-700 dark:text-gray-300">Select Sorting Algorithm:</label>
+                        <select id="algorithmSelection" class="w-full border border-gray-300 p-2 rounded-md">
+                            <option value="bubbleSort">Bubble Sort</option>
+                            <option value="selectionSort">Selection Sort</option>
+                            <option value="insertionSort">Insertion Sort</option>
+                            <option value="quickSort">Quick Sort</option>
+                            <option value="mergeSort">Merge Sort</option>
+                        </select>
+                    </div>
+                    
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full"
+                            id="runAlgorithmButton">
+                            <i class="fas fa-sort-amount-up" aria-hidden="true"></i> Run Algorithm
+                        </button>
+                        <button class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full"
+                            id="run" onclick="resetArray()">
+                            <i class="fas fa-play"></i> Reset Array
+                        </button>
+                    </div>
+
+                    <div id="array-container" class="flex items-center justify-center max-h-64 border border-gray-300 dark:border-gray-700" style="height: 300px; width: 100% ; border: 1px solid black;"></div>
+                    <div id="algorithm-description" class="mt-4">
+                        <!-- Algorithm descriptions will be displayed here -->
+                    </div>
+                    <div id="algorithm-complexities" class="my-4">
+                        <table id="complexity-table" class="table-auto w-full divide-y divide-gray-300" style="display: none;">
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2 font-semibold">Algorithm</td>
+                                    <td id="algorithm-name-cell" class="px-4 py-2"></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-semibold">Average Case</td>
+                                    <td id="average-case-cell" class="px-4 py-2"></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-semibold">Worst Case</td>
+                                    <td id="worst-case-cell" class="px-4 py-2"></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-semibold">Best Case</td>
+                                    <td id="best-case-cell" class="px-4 py-2"></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 font-semibold">Space Complexity</td>
+                                    <td id="space-complexity-cell" class="px-4 py-2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </section>
+            </div>
+        </div>
+
+        <footer class="text-gray-600 bg-white dark:bg-gray-800 dark:text-white mt-12">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <div class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 dark:text-gray-200">
+                    <div class="ml-3 text-xl">VisualAlgorithm Hub</div>
+                </div>
+                <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 mt-4 md:mt-2 mb-2 md:mb-0 text-center dark:text-gray-400">
+                    Copyright © 2023 Visual Algorithm Hub. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

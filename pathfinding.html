@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="pathfinding.js"></script>
+    <script>
+        function switchMode(mode) {
+            selectedMode = mode;
+            isDrawing = mode === 'draw';
+        }
+    </script>
+    <title>Pathfinding Algorithms - Visual Algorithm Hub</title>
+    <style>
+        #grid-container {
+           display: none;
+           border: 2px solid #333;
+           border-radius: 5px;
+           padding: 10px;
+           margin: 10px;
+        }
+         /* Style for the table (grid) */
+         table {
+         border-collapse: collapse;
+         }
+         /* Style for the table cells */
+         td {
+         width: 30px; /* Adjust the width of cells */
+         height: 30px; /* Adjust the height of cells */
+         border: 1px solid #ccc;
+         background-color: #f0f0f0;
+         text-align: center;
+         }
+         /* Style for obstacle cells */
+         .obstacle {
+         background-color: #333; /* Dark gray for obstacles */
+         color: white; /* White text for obstacles */
+         }
+        .start {
+            background-color: green;
+        }
+
+        .end {
+            background-color: red;
+        }
+         /* Style for the legend */
+#legend {
+    margin-top: 1rem;
+}
+
+.legend-item {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+/* Add more styling as needed */
+
+    </style>
+</head>
+
+<body class="font-sans bg-gray-100 dark:bg-gray-800">
+    <div id="__next">
+        <div class="bg-white dark:bg-gray-900">
+            <div class="border-b dark:border-gray-500">
+                <div class="container mx-auto">
+                    <div class="flex items-center justify-between py-4 md:space-x-4">
+                        <div class="flex items-center">
+                            <span class="text-purple-700 text-lg font-bold">Visual Algorithm Hub</span>
+                        </div>
+                        <div class="hidden md:flex items-center space-x-4">
+                            <a href="index.html" class="text-black hover:text-purple-700 dark:text-white">Home</a>
+                            <a href="sorting.html" id="sorting-link" class="text-black hover:text-purple-700 dark:text-white">Sorting Algorithms</a>
+                            <a href="pathfinding.html" id="pathfinding-link" class="text-black hover:text-purple-700 dark:text-white">Pathfinding Algorithms</a>
+                            <a href="searching.html" id="searching-link" class="text-black hover:text-purple-700 dark:text-white">Searching Algorithms</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto mt-4 p-4">
+                <section id="pathfinding-section">
+                    <h2 class="text-3xl font-semibold text-gray-800 dark:text-white mb-4">Pathfinding Algorithms</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="my-4">
+                            <label for="pathfindingAlgorithmSelection" class="text-gray-700 dark:text-gray-300">Select Pathfinding Algorithm:</label>
+                            <select id="pathfindingAlgorithmSelection" class="w-full border border-gray-300 p-2 rounded-md">
+                                <option value="bfs">Breadth-First Search</option>
+                                <option value="dfs">Depth-First Search</option>
+                                <option value="dijkstra">Dijkstra Algorithm</option>
+                                <option value="dijkstra"> A <sup>*</sup> Algorithm</option>
+                            </select>
+                        </div>
+                    
+                        <div style="margin-top: 20px; margin-left: 40px;">
+                            <label for="gridSize" class="text-gray-700 dark:text-gray-300" >Grid Size:</label>
+                            <input type="number" id="gridSize" min="1" max="20" value="40"
+                                class="w-full bg-gray-200 dark:bg-gray-700 rounded-md p-1">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <button id="createGridButton" class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full">
+                                Create Grid
+                            </button>
+                            <button id="runPathfindingAlgorithmButton"
+                            class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full" style="margin-top:15px; ;">
+                            <i class="fas fa-sitemap"></i> Run Selected Algorithm
+                        </button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full"
+                                id="selectStartButton" onclick="switchMode('start')">
+                                <i class="fas fa-mouse-pointer"></i> Select Start Point
+                            </button>
+                            <button class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full"
+                                id="selectEndButton" onclick="switchMode('end')">
+                                <i class="fas fa-flag-checkered"></i> Select End Point
+                            </button>
+                            <button class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full"
+                                id="drawObstaclesButton" onclick="switchMode('draw')">
+                                <i class="fas fa-paint-brush"></i> Draw Obstacles
+                            </button>
+                            <button class="bg-purple-700 text-white rounded-md p-2 hover:bg-purple-600 focus:outline-none focus:shadow-outline-purple active:bg-purple-800 w-full"
+                                id="clearGridButton" onclick="clearGrid">
+                                Clear Grid
+                            </button>
+                        </div>
+                    </div>
+                    <div id="legend" class="mt-4">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Legend</h3>
+                        <div class="flex space-x-2 items-center">
+                            <div class="legend-item" style="background-color: lightblue;"></div>
+                            <span class="text-gray-700 dark:text-gray-300">Visited</span>
+                            <div class="legend-item" style="background-color: yellow;  margin-left: 77px;"></div>
+                            <span class="text-gray-700 dark:text-gray-300">Shortest Path</span>
+                        </div>
+
+                        <div class="flex space-x-2 items-center">
+                            <div class="legend-item" style="background-color: green; "></div>
+                            <span class="text-gray-700 dark:text-gray-300">Start Cell</span>
+                        
+                            <div class="legend-item" style="background-color: red; margin-left: 60px;"></div>
+                            <span class="text-gray-700 dark:text-gray-300">End Cell</span>
+                        </div>
+                    </div>
+                        <div class="flex space-x-2 items-center">
+                            <div class="legend-item" style="background-color: black"></div>
+                            <span class="text-gray-700 dark:text-gray-300">Obstacles</span>
+                        </div>
+                        <!-- Add more legend items as needed -->
+                    </div>
+                    
+
+                    <div id="grid-container" class="mt-8">
+                        <table id="grid">
+                            <!-- Include data-coords attribute for each cell -->
+                            <tr>
+                                <td data-coords="0,0"></td>
+                                <td data-coords="0,1"></td>
+                                <!-- Add more cells here -->
+                            </tr>
+                            <tr>
+                                <td data-coords="1,0"></td>
+                                <td data-coords="1,1"></td>
+                                <!-- Add more rows here -->
+                            </tr>
+                        </table>
+                    </div>
+                
+                </section>
+            </div>
+        </div>
+
+        <footer class="text-gray-600 bg-white dark:bg-gray-800 dark:text-white mt-12" style="margin-top: 200px;">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <div class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 dark:text-gray-200">
+                    <div class="ml-3 text-xl">VisualAlgorithm Hub</div>
+                </div>
+                <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 mt-4 md:mt-2 mb-2 md:mb-0 text-center dark:text-gray-400">
+                    Copyright © 2023 Visual Algorithm Hub. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+    </div>
+    
+</body>
+
+</html>
