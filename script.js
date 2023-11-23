@@ -56,6 +56,22 @@ document.addEventListener("DOMContentLoaded", function () {
         // Start the typing animation
         typeAlgorithmName();
     }
+    const menuIcon = document.getElementById('menu-icon');
+    const menuList = document.getElementById('nav-content');
+
+    menuList.style.display = 'none';
+
+    menuIcon.addEventListener('click', function () {
+        // Toggle the visibility of the menu list
+        menuList.style.display = menuList.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Add an event listener to hide the menu on larger screens
+    window.addEventListener('resize', function () {
+        if (window.innerWidth >= 768) {
+            menuList.style.display = 'none';
+        }
+    });
 }); 
 
 
