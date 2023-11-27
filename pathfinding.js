@@ -238,7 +238,7 @@ function sleep(ms) {
 }
 
 
-let animationSpeedPath=5;
+let animationSpeedPath=50;
 
 async function breadthFirstSearch(obstacles) {
     const start = getStartPoint();
@@ -322,7 +322,6 @@ async function breadthFirstSearch(obstacles) {
     // Start the algorithm with the first cell
     processNextCell();
 }
-
 
 // Function to implement Depth-First Search (DFS)
 async function depthFirstSearch(obstacles) {
@@ -424,6 +423,8 @@ async function depthFirstSearch(obstacles) {
     // Start the algorithm with the first cell
     await processNextCell();
 }
+
+
 
 
 // Function to implement Dijkstra's Algorithm

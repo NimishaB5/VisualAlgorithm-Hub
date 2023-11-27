@@ -56,23 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Start the typing animation
         typeAlgorithmName();
     }
-    const menuIcon = document.getElementById('menu-icon');
-    const menuList = document.getElementById('nav-content');
-
-    menuList.style.display = 'none';
-
-    menuIcon.addEventListener('click', function () {
-        // Toggle the visibility of the menu list
-        menuList.style.display = menuList.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Add an event listener to hide the menu on larger screens
-    window.addEventListener('resize', function () {
-        if (window.innerWidth >= 768) {
-            menuList.style.display = 'none';
-        }
-    });
-
+    
+  
 
 
 
@@ -84,7 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const arraySection = document.getElementById("sorting-section");
     const generateArrayButton = document.getElementById("generateArrayButton");
-    
+    // Debugging: Log the values of arrayContainer and generateArrayButton
+    console.log("arrayContainer:", arrayContainer);
+    console.log("generateArrayButton:", generateArrayButton);
     document.getElementById("speedControl").addEventListener("input", function () {
         animationSpeed = this.value;
     });
@@ -200,16 +187,19 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Generate an array of random numbers with the specified size and display bars
         originalArray = generateRandomArray(arraySize);
-        console.log("araay is returned");
         currentArray = [...originalArray];
-        console.log(currentArray);
         displayArray(currentArray);
     }
     
     generateArrayButton.addEventListener("click", () =>{
+        console.log("Generate Array Button Clicked");
         arraySection.style.display = "block";
+        generateArray();
     });
     
+    const resetArrayButton = document.getElementById("resetArrayButton");
+
+    resetArrayButton.addEventListener("click", resetArray);
     
     // Reset the array
     function resetArray() {
